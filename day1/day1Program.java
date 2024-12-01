@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Day1Program {
 
@@ -23,10 +25,7 @@ public class Day1Program {
                     column2.add(Integer.parseInt(values[1]));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
         List<ArrayList<Integer>> columns = new ArrayList<>();
         columns.add(column1);
         columns.add(column2);
@@ -44,6 +43,14 @@ public class Day1Program {
         return delta;
     }
 
+    public static List<ArrayList<Integer>> getNumberQuantities(List<ArrayList<Integer>> input) {
+        ArrayList<Integer> column1 = input.get(0);
+        ArrayList<Integer> column2 = input.get(1);
+
+        Map<Integer, Integer> quantities = new HashMap<>();
+
+    }
+
     public static void main(String[] args) {
         List<ArrayList<Integer>> columns = getPuzzleInput(FILE_PATH);
         ArrayList<Integer> column1 = columns.get(0);
@@ -54,7 +61,9 @@ public class Day1Program {
 
         int totalDelta = findDelta(columns);
 
-        System.out.println(totalDelta);
+        System.out.printf("Total Delta: %d \n", totalDelta);
+
+
 
     }
 }
