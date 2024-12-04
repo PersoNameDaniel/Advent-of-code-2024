@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class solutionDay4 {
+public class firstPartSolutionDay4 {
     public static void main(String[] args) {
         String filePath = "//10.18.220.100/Spencer/Documents/GitHub/Advent-Of-Code-2024/4day/inputDay4";
         char[][] input = new char[140][140];

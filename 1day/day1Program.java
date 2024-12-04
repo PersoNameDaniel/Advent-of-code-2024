@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Day1Program {
+public class day1Program {
 
     // declaration of static variables
     private static final String FILE_PATH = "./day1Input.txt";
