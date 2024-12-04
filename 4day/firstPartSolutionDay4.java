@@ -24,16 +24,16 @@ public class solutionDay4 {
 
         for (int i = 0; i < 140; i++) {
             for (int j = 0; j < 140; j++) {
-                if (input[i][j] != 'X') {
-                    XMASCount += checkNorth(input, i, j);
-                    XMASCount += checkSouth(input, i, j);
-                    XMASCount += checkEast(input, i, j);
-                    XMASCount += checkWest(input, i, j);
-                    XMASCount += checkNorthEast(input, i, j);
-                    XMASCount += checkNorthWest(input, i, j);
-                    XMASCount += checkSouthEast(input, i, j);
-                    XMASCount += checkSouthWest(input, i, j);
-                } 
+                if (input[i][j] != 'X')
+                    continue;
+                XMASCount += checkNorth(input, i, j);
+                XMASCount += checkSouth(input, i, j);
+                XMASCount += checkEast(input, i, j);
+                XMASCount += checkWest(input, i, j);
+                XMASCount += checkNorthEast(input, i, j);
+                XMASCount += checkNorthWest(input, i, j);
+                XMASCount += checkSouthEast(input, i, j);
+                XMASCount += checkSouthWest(input, i, j);
             }
         }
 
