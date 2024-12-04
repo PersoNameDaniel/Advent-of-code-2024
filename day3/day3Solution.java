@@ -1,27 +1,13 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class day3Solution {
     public static void main(String[] args) {
         String filePath = "./day3Input.txt";
-        String input = null;
-        StringBuilder fileContent = new StringBuilder();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Process each line of the file
-                fileContent.append(line);
-                fileContent.append(System.lineSeparator());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        input = fileContent.toString().trim(); // Convert StringBuilder to String and trim any extra spaces
+        String input = readFileAsString(filePath);
 
         // Debug statement to check if input is read correctly
         System.out.println("Input read from file:");
@@ -36,7 +22,8 @@ public class day3Solution {
         int secondListToNum = 0;
         int result = 0;
 
-        for (int i=0; i<input.length(); i++) {
+        //for (int i=0; i<input.length(); i++) {
+        for (int i=0; i<1000; i++) {
             firstNum.clear();
             secondNum.clear();
             tempIndex = i;
@@ -84,5 +71,15 @@ public class day3Solution {
             number = number * 10 + digit;
         }
         return number;
+    }
+
+    public static String readFileAsString(String filePath) {
+        try {
+            // Read the entire file content as a single string
+            return new String(Files.readAllBytes(Paths.get(filePath)));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ""; // Return an empty string in case of an exception
+        }
     }
 }
