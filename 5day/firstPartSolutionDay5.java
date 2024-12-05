@@ -80,15 +80,9 @@ public class firstPartSolutionDay5 {
 
     public static int checkPageOrder(List<Tuple> allPageOrder, List<List<Integer>> pages) {
         int centerPages = 0;
-        boolean inOrder = false;
 
-        inOrderPages:
         for (List<Integer> pageRow : pages) {
-
-            if (inOrder) {
-            centerPages += pageRow.get((pageRow.size()/2) - 1);
-            inOrder = false;
-            }
+            boolean inOrder = true;
 
             for (int i = 0; i < pageRow.size(); i++) {
                 int page = pageRow.get(i);
@@ -98,15 +92,19 @@ public class firstPartSolutionDay5 {
                         // check for first page in remaining pages
                         for (int j = i + 1; j < pageRow.size(); j++) {
                             if (individualPageOrder.first == pageRow.get(j)) {
-                                return 0;
+                                inOrder = false;
+                                break;
                             }
-                            inOrder = true;
-                            break inOrderPages;
                         }
-
+                        if (!inOrder)
+                            break;
                     }
                 }
+                if (!inOrder)
+                        break;
             }
+            if (inOrder)
+                centerPages += pageRow.get(pageRow.size() / 2);
         }
         return centerPages;
     }
