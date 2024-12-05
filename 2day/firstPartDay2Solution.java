@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class day2Solution {
+public class firstPartDay2Solution {
     public static void main(String[] args) throws Exception {
         List<List<Integer>> data = readFile("2day/day2Input");
 
