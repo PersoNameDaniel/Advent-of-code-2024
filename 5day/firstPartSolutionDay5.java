@@ -3,6 +3,41 @@ import java.util.*;
 
 public class firstPartSolutionDay5 {
     public static void main(String[] args) throws IOException {
+
+        // Sample input
+        List<Tuple> sampleFirstSection = Arrays.asList(
+            new Tuple(47, 53),
+            new Tuple(97, 13),
+            new Tuple(97, 61),
+            new Tuple(97, 47),
+            new Tuple(75, 29),
+            new Tuple(61, 13),
+            new Tuple(75, 53),
+            new Tuple(29, 13),
+            new Tuple(97, 29),
+            new Tuple(53, 29),
+            new Tuple(61, 53),
+            new Tuple(97, 53),
+            new Tuple(61, 29),
+            new Tuple(47, 13),
+            new Tuple(75, 47),
+            new Tuple(97, 75),
+            new Tuple(47, 61),
+            new Tuple(75, 61),
+            new Tuple(47, 29),
+            new Tuple(75, 13),
+            new Tuple(53, 13)
+        );
+
+        List<List<Integer>> sampleSecondSection = Arrays.asList(
+            Arrays.asList(75, 47, 61, 53, 29),
+            Arrays.asList(97, 61, 53, 29, 13),
+            Arrays.asList(75, 29, 13),
+            Arrays.asList(75, 97, 47, 61, 53),
+            Arrays.asList(61, 13, 29),
+            Arrays.asList(97, 13, 75, 29, 47)
+        );
+
         String filePath = "5day/inputDay5";
         List<Tuple> firstSection = new ArrayList<>();
         List<List<Integer>> secondSection = new ArrayList<>();
@@ -33,34 +68,47 @@ public class firstPartSolutionDay5 {
         }
         br.close();
 
-        // Print the results for verification
-        //System.out.println("First Section (List of Tuples): " + firstSection);
-        //System.out.println("Second Section (List of Lists): " + secondSection);
-
+        int sampleAnswer = 0;
         int answer = 0;
 
-        for (List<Integer> listRow : secondSection) {
-            if (checkPageOrder(listRow, firstSection) == true) {
-                answer += listRow.get((listRow.size()/2) - 1);
-            }
-        }
+        sampleAnswer += checkPageOrder(sampleFirstSection, sampleSecondSection);
+        answer += checkPageOrder(firstSection, secondSection);
 
+        System.out.printf("Sample total: %d, Expected: 143\n", sampleAnswer);
         System.out.printf("Total: %d\n", answer);
     }
 
-    public static boolean checkPageOrder(List<Integer> listInput, List<Tuple> tupleInput) {
-        for (Tuple pageOrder : tupleInput) {
-            for (int i=0; i<listInput.size(); i++) {
-                if (listInput.get(i) == pageOrder.second) {
-                    for (int j=0; j<(listInput.size()-i); j++) {
-                        if (listInput.get(j) == pageOrder.first) {
-                            return false;
+    public static int checkPageOrder(List<Tuple> allPageOrder, List<List<Integer>> pages) {
+        int centerPages = 0;
+        boolean inOrder = false;
+
+        inOrderPages:
+        for (List<Integer> pageRow : pages) {
+
+            if (inOrder) {
+            centerPages += pageRow.get((pageRow.size()/2) - 1);
+            inOrder = false;
+            }
+
+            for (int i = 0; i < pageRow.size(); i++) {
+                int page = pageRow.get(i);
+
+                for (Tuple individualPageOrder : allPageOrder) {
+                    if (individualPageOrder.second == page) {
+                        // check for first page in remaining pages
+                        for (int j = i + 1; j < pageRow.size(); j++) {
+                            if (individualPageOrder.first == pageRow.get(j)) {
+                                return 0;
+                            }
+                            inOrder = true;
+                            break inOrderPages;
                         }
+
                     }
                 }
             }
         }
-        return true;
+        return centerPages;
     }
 }
 
